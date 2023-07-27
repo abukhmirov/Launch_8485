@@ -14,10 +14,23 @@ namespace Tourism.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? timeZone)
         {
-            var states = _context.States.ToList();
+            var states = _context.States.AsEnumerable();
+
+            if (timeZone != null)
+            {
+                states = states.Where(m => m.TimeZone == timeZone);
+                ViewData["SearchTimeZone"] = timeZone;
+            }
+
+            ViewData["AllTimeZones"] = _context.States.Select(m => m.TimeZone).Distinct().ToList();
+            
+            //var states = _context.States.ToList();
             return View(states);
+
+            
+            
         }
 
 		public IActionResult New()
