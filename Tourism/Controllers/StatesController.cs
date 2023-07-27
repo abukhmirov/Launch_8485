@@ -73,5 +73,14 @@ namespace Tourism.Controllers
 
             return RedirectToAction("show", new { stateId = state.Id });
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var state = _context.States.Find(id);
+            _context.States.Remove(state);
+            _context.SaveChanges();
+            return RedirectToAction("index");
+        }
     }
 }
