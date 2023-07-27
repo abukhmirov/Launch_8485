@@ -58,7 +58,7 @@ namespace Tourism.Controllers
             _context.States.Update(state);
             _context.SaveChanges();
 
-            return RedirectToAction("show", new { id = state.Id });
+            return RedirectToAction("show", new { stateId = state.Id });
         }
     }
 }
