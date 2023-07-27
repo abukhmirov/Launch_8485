@@ -49,6 +49,16 @@ namespace Tourism.Controllers
             return View(state);
         }
 
-       
+        [HttpPost]
+        [Route("States/{id:int}")]
+        public IActionResult Update(int id, State state)
+        {
+
+            state.Id = id;
+            _context.States.Update(state);
+            _context.SaveChanges();
+
+            return RedirectToAction("show", new { id = state.Id });
+        }
     }
 }
